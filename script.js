@@ -10,11 +10,9 @@ function getComputerChoice() {
     return choices[choice]
 }
 
-computerSelection = getComputerChoice()
-// console.log(computerSelection)
-
-playerSelection = prompt("Rock, Paper, Scissor?").toLocaleLowerCase()
-// console.log(playerSelection)
+// for scoring (pP refering to player points as cP to computer points)
+pP = 0
+cP = 0
 
 function playRound(pS, cS) {
 
@@ -28,10 +26,12 @@ function playRound(pS, cS) {
                 break;
 
             case choices[1]:
+                cP += 1;
                 return `You Lose! ${cS} beat ${pS}`
                 break;
 
             case choices[2]:
+                pP += 1;
                 return `You Win! ${pS} beat ${cS}`
                 break;
         }
@@ -40,6 +40,7 @@ function playRound(pS, cS) {
     else if (pS === choices[1]) {
         switch (cS) {
             case choices[0]:
+                pP += 1;
                 return `You Win! ${pS} beat ${cS}`
                 break;
 
@@ -48,6 +49,7 @@ function playRound(pS, cS) {
                 break;
 
             case choices[3]:
+                cP += 1;
                 return `You Lose! ${cS} beat ${pS}`
                 break;
         }
@@ -56,10 +58,12 @@ function playRound(pS, cS) {
     else if (pS === choices[2]) {
         switch (cS) {
             case choices[0]:
+                cP += 1;
                 return `You Lose! ${cS} beat ${pS}`
                 break;
 
             case choices[1]:
+                pP += 1;
                 return `You Win! ${pS} beat ${cS}`
                 break;
 
@@ -74,4 +78,30 @@ function playRound(pS, cS) {
     }
 }
 
-console.log(playRound(playerSelection, computerSelection))
+// console.log(playRound(playerSelection, computerSelection))
+
+function game() {
+
+    // playRound(playerSelection, computerSelection)
+
+    for (let i = 0; i < 5; i++) {
+
+        playerSelection = prompt("Rock, Paper, Scissor?").toLocaleLowerCase()
+        console.log(`You selected : ${playerSelection}`)
+
+        computerSelection = getComputerChoice()
+        console.log(`The computer selected : ${computerSelection}`)
+
+        console.log(playRound(playerSelection, computerSelection))
+        console.log(`Computer point(s) : ${cP}, Your point(s) : ${pP}`);
+    }
+
+    if (cP > pP) {
+        console.log("You Lost to The Computer!");
+    } else {
+        console.log("You Won The Game!");
+    }
+
+}
+
+game();
